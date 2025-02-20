@@ -14,7 +14,7 @@ fun addProduct(mutableProduct:MutableList<Product>){
         mutableProduct.add(Product(idProduct,nameProduct,priceProduct,originProduct))
 }
 
-fun enterValue(mutableCategory:MutableList<Category>,mutableProduct:MutableList<Product>){
+fun enterValue(mutableCategory:MutableList<Category>){
     println("Nhập danh mục")
     print("Mã danh mục: ")
     val idCategory = readlnOrNull()?.toIntOrNull()
@@ -28,6 +28,7 @@ fun enterValue(mutableCategory:MutableList<Category>,mutableProduct:MutableList<
         countProduct = readlnOrNull()?.toIntOrNull()
     }while (countProduct == null)
 
+    val mutableProduct:MutableList<Product> = mutableListOf()
     for (i in 1..countProduct){
         println("Nhập sản phẩm thứ $i")
         addProduct(mutableProduct)
@@ -74,7 +75,7 @@ fun listOfProduct(mutableCategory:MutableList<Category>){
 fun updateProduct(mutableCategory:MutableList<Category>){
     var idCategoryToUpdate: Int?
     do {
-        print("Nhập mã sản phẩm mà bạn muốn sửa: ")
+        print("Nhập mã danh mục mà bạn muốn sửa: ")
         idCategoryToUpdate = readlnOrNull()?.toIntOrNull()
     }while (idCategoryToUpdate == null)
 
@@ -119,8 +120,12 @@ fun updateProduct(mutableCategory:MutableList<Category>){
 }
 
 fun deleteProduct(mutableCategory: MutableList<Category>) {
-    print("Nhập ID danh mục: ")
-    val idCategoryToDelete = readlnOrNull()?.toIntOrNull()
+    var idCategoryToDelete: Int?
+    do {
+        print("Nhập ID danh mục: ")
+        idCategoryToDelete = readlnOrNull()?.toIntOrNull()
+    }while (idCategoryToDelete == null)
+
     val isCategoryRemove = mutableCategory.find { it.id == idCategoryToDelete }
 
     if (isCategoryRemove!= null){
@@ -139,21 +144,22 @@ fun deleteProduct(mutableCategory: MutableList<Category>) {
     }
 }
 
-fun totalPriceOf(mutableProduct: MutableList<Product>){
-    val totalValue = mutableProduct.sumOf { it.price }
+fun totalPriceOf(mutableCategory: MutableList<Category>){
+    val totalValue = mutableCategory.sumOf { it.listProduct.sumOf { it.price } }
     println("Tổng giá trị của các mặt hàng: $totalValue")
 }
 
-fun listChinaProduct(mutableProduct: MutableList<Product>){
-    val chinaProducts = mutableProduct.filter { it.origin.equals("Trung Quốc", ignoreCase = true) }
-    for (product in chinaProducts){
-        println(product)
+fun listChinaProduct(mutableCategory: MutableList<Category>){
+    for (category in mutableCategory){
+        val chinaProducts = category.listProduct.filter { it.origin.equals("Trung Quốc", ignoreCase = true) }
+        for (product in chinaProducts){
+            println(product)
+        }
     }
 }
 
 fun main(){
     val mutableCategory:MutableList<Category> = mutableListOf()
-    val mutableProduct:MutableList<Product> = mutableListOf()
 
     do {
         println("\n--- QUẢN LÝ BÁN HÀNG ---")
@@ -169,18 +175,17 @@ fun main(){
         val choice = readln().toIntOrNull() ?: -1
 
         when (choice) {
-            1 -> enterValue(mutableCategory,mutableProduct)
+            1 -> enterValue(mutableCategory)
             2 -> listOfProduct(mutableCategory)
             3 -> updateProduct(mutableCategory)
             4 -> deleteProduct(mutableCategory)
-            5 -> totalPriceOf(mutableProduct)
-            6 -> listChinaProduct(mutableProduct)
+            5 -> totalPriceOf(mutableCategory)
+            6 -> listChinaProduct(mutableCategory)
             7 -> {
                 println("Thoát chương trình.")
                 return
             }
             else -> println("Lựa chọn không hợp lệ!")
         }
-        println()
     }while (true)
 }
