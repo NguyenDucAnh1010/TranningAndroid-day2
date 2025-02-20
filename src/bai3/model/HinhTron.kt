@@ -1,6 +1,8 @@
+package bai3.model
+
 import kotlin.math.PI
 
-class HinhTron(mau: String, private val bankinh: Double): Hinh(mau) {
+class HinhTron(mau: String, private val bankinh: Double) : Hinh(mau) {
 
     override fun TinhDienTich(): Double {
         return PI * bankinh * bankinh

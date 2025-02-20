@@ -1,3 +1,5 @@
+package bai3.model
+
 class HinhVuong(mau: String, private val canh: Double) : HinhChuNhat(mau, canh, canh) {
 
     override fun LayThongTin(): String {

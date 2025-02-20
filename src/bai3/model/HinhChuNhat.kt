@@ -1,3 +1,5 @@
+package bai3.model
+
 open class HinhChuNhat(mau: String, private var chieudai: Double, private var chieurong: Double) : Hinh(mau) {
     override fun TinhDienTich(): Double {
         return chieudai * chieurong

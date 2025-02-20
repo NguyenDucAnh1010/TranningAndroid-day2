@@ -1,4 +1,6 @@
-open class Hinh (var mau:String) {
+package bai3.model
+
+open class Hinh(var mau: String) {
     open fun TinhDienTich(): Double {
         return 0.0
     }

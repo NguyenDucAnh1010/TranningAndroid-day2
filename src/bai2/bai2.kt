@@ -1,3 +1,5 @@
+package bai2
+
 import kotlin.math.PI
 
 open class Point(private var x: Int, private var y: Int) {
@@ -6,12 +8,12 @@ open class Point(private var x: Int, private var y: Int) {
     }
 }
 
-class Cicrle(x: Int, y:Int, private var radius:Double):Point (x,y) {
+class Cicrle(x: Int, y: Int, private var radius: Double) : Point(x, y) {
     override fun toString(): String {
         return "Circle(${super.toString()}, Bán kính: $radius)"
     }
 
-    fun getDiameter():Double{
+    fun getDiameter(): Double {
         return 2 * radius
     }
 
@@ -24,12 +26,12 @@ class Cicrle(x: Int, y:Int, private var radius:Double):Point (x,y) {
     }
 }
 
-fun main(){
+fun main() {
     var countCicrle: Int?
     do {
         print("Nhập số lượng hình tròn: ")
         countCicrle = readlnOrNull()?.toIntOrNull()
-    }while (countCicrle == null)
+    } while (countCicrle == null)
 
     val circles = mutableListOf<Cicrle>()
 

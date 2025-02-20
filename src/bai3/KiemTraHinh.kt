@@ -1,3 +1,10 @@
+package bai3
+
+import bai3.model.Hinh
+import bai3.model.HinhChuNhat
+import bai3.model.HinhTron
+import bai3.model.HinhVuong
+
 fun main() {
     val hinhChuNhat = HinhChuNhat("Xanh", 4.0, 5.0)
     val hinhTron = HinhTron("Đỏ", 3.0)
